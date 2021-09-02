@@ -21,18 +21,14 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Use OCaml 4.12.0
-        uses: ocaml/setup-ocaml@v2
-        with:
-          ocaml-compiler: 4.12.0
-          dune-cache: true
-          cache-prefix: build-static
+      - run: eval $(opam env) && opam update -y
+      - run: eval $(opam env) && opam install . -y --deps-only
 
       - name: Build
-        run: opam exec -- dune build --profile=release
+        run: eval $(opam env) && dune build --profile=release
 
       - name: Install
-        run: opam exec -- dune install --profile=release
+        run: eval $(opam env) && dune install --profile=release
 
       - name: Upload the build artifact
         uses: actions/upload-artifact@v2
