@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocaml/opam:alpine-ocaml-4.12
-      options: --user 1000:1000
+      options: --user 1001
 
     steps:
       - run: echo "SRC_ROOT=$HOME/gh_actions_ocaml_docker" >> $GITHUB_ENV
