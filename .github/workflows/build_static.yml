@@ -16,11 +16,10 @@ jobs:
       options: --user 1001
 
     steps:
-      - run: echo "SRC_ROOT=$HOME/gh_actions_ocaml_docker" >> $GITHUB_ENV
-
       - name: Checkout code
-        run: git clone https://github.com/mooreryan/gh_actions_ocaml_docker.git "${SRC_ROOT}"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Build
         run: dune build
-        working-directory: "${SRC_ROOT}"
