@@ -21,5 +21,21 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Use OCaml 4.12.0
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: 4.12.0
+          dune-cache: true
+          cache-prefix: build-static
+
       - name: Build
-        run: dune build
+        run: opam exec -- dune build --profile=release
+
+      - name: Install
+        run: opam exec -- dune install --profile=release
+
+      - name: Upload the build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: alpine-4.12.0-static-pasv
+          path: _build/install/default/hello
