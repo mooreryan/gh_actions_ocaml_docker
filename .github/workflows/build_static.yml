@@ -14,7 +14,7 @@ jobs:
     container: ocaml/opam:alpine-ocaml-4.12
 
     steps:
-      - run: echo "SRC_ROOT=$HOME/gh_actions_ocaml_docker" >> $GITHUB_ENV
+      - run: sudo echo "SRC_ROOT=$HOME/gh_actions_ocaml_docker" >> $GITHUB_ENV
 
       - name: Checkout code
         run: git clone https://github.com/mooreryan/gh_actions_ocaml_docker.git "${SRC_ROOT}"
