@@ -21,15 +21,14 @@ jobs:
         with:
           submodules: recursive
 
-      - run: opam init
-      - run: eval $(opam env) && opam update -y
-      - run: eval $(opam env) && opam install . -y --deps-only
+      - run: opam update -y
+      - run: opam install . -y --deps-only
 
       - name: Build
-        run: eval $(opam env) && dune build --profile=release
+        run: opam exec -- dune build --profile=release
 
       - name: Install
-        run: eval $(opam env) && dune install --profile=release
+        run: opam exec -- dune install --profile=release
 
       - name: Upload the build artifact
         uses: actions/upload-artifact@v2
