@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     container: ocaml/opam:alpine-ocaml-4.12
 
-  steps:
-    - run: echo "SRC_ROOT=$HOME/gh_actions_ocaml_docker" >> $GITHUB_ENV
+    steps:
+      - run: echo "SRC_ROOT=$HOME/gh_actions_ocaml_docker" >> $GITHUB_ENV
 
-    - name: Checkout code
-      run: git clone https://github.com/mooreryan/gh_actions_ocaml_docker.git "${SRC_ROOT}"
+      - name: Checkout code
+        run: git clone https://github.com/mooreryan/gh_actions_ocaml_docker.git "${SRC_ROOT}"
 
-    - name: Build
-      run: dune build
-      working-directory: "${SRC_ROOT}"
+      - name: Build
+        run: dune build
+        working-directory: "${SRC_ROOT}"
