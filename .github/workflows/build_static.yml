@@ -21,6 +21,7 @@ jobs:
         with:
           submodules: recursive
 
+      - run: opam init
       - run: eval $(opam env) && opam update -y
       - run: eval $(opam env) && opam install . -y --deps-only
 
