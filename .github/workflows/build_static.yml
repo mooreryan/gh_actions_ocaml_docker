@@ -12,30 +12,52 @@ jobs:
   build_static:
     runs-on: ubuntu-latest
     container:
-      image: ocaml/opam:alpine-ocaml-4.12
-      options: --user 1001
+      image: ocamlpro/ocaml:4.12-2021-08-29
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
+          path: apple_pie
           submodules: recursive
 
-      - run: sudo chmod u+s /usr/bin/bwrap
-      - run: sudo apk add linux-headers m4
-      - run: opam init -y
-      - run: opam update -y
-      - run: opam install . -y --deps-only
+      - name: Create switch
+        run: opam switch create . ocaml-system --deps --locked
+        working-directory: apple_pie
 
       - name: Build
         run: opam exec -- dune build --profile=release
-
+        working-directory: apple_pie
 
       - name: Install
         run: opam exec -- dune install --profile=release
+        working-directory: apple_pie
 
-      - name: Upload the build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: alpine-4.12.0-static-pasv
-          path: _build/install/default/hello
+    # container:
+    #   image: ocaml/opam:alpine-ocaml-4.12
+    #   options: --user 1001
+
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v2
+    #     with:
+    #       submodules: recursive
+
+    #   - run: sudo chmod u+s /usr/bin/bwrap
+    #   - run: sudo apk add linux-headers m4
+    #   - run: opam init -y
+    #   - run: opam update -y
+    #   - run: opam install . -y --deps-only
+
+    #   - name: Build
+    #     run: opam exec -- dune build --profile=release
+
+
+    #   - name: Install
+    #     run: opam exec -- dune install --profile=release
+
+    #   - name: Upload the build artifact
+    #     uses: actions/upload-artifact@v2
+    #     with:
+    #       name: alpine-4.12.0-static-pasv
+    #       path: _build/install/default/hello
