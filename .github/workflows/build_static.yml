@@ -21,7 +21,9 @@ jobs:
         with:
           submodules: recursive
 
-      - run: opam init
+      - run: chmod u+s /usr/bin/bwrap
+      - run: apk add linux-headers m4
+      - run: opam init -y
       - run: opam update -y
       - run: opam install . -y --deps-only
 
