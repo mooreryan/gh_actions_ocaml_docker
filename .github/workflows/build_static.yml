@@ -70,6 +70,13 @@ jobs:
         run: sudo opam exec -- dune install --profile=release
         working-directory: apple_pie
 
+      - name: Upload the build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: alpine-4.12.0-static-hello
+          path: _build/install/default/hello
+          working-directory: apple_pie
+
     # container:
     #   image: ocaml/opam:alpine-ocaml-4.12
     #   options: --user 1001
@@ -92,9 +99,3 @@ jobs:
 
     #   - name: Install
     #     run: opam exec -- dune install --profile=release
-
-    #   - name: Upload the build artifact
-    #     uses: actions/upload-artifact@v2
-    #     with:
-    #       name: alpine-4.12.0-static-pasv
-    #       path: _build/install/default/hello
