@@ -13,19 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocamlpro/ocaml:4.12-2021-08-29
-      options: --user 1001
+      # options: --user 1001
       # options: --user ocaml
 
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
-      #   with:
-      #     path: apple_pie
-      #     submodules: recursive
-
-      - run: usermod -aG sudo 1001
 
       - run: sudo apk add bubblewrap m4 bash
+
+      - run: addgroup 1001 sudo
+
+      - run: su 1001
+
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: apple_pie
+          submodules: recursive
 
       - run: echo $GITHUB_WORKSPACE
       - run: ls $GITHUB_WORKSPACE
