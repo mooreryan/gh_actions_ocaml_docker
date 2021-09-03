@@ -21,6 +21,7 @@ jobs:
         with:
           submodules: recursive
 
+      - run: opam init
       - run: opam update -y
       - run: opam install . -y --deps-only
 
