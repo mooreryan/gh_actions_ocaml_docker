@@ -13,95 +13,83 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocamlpro/ocaml:4.12-2021-08-29
-      # options: --user 1001
-      # options: --user ocaml
       options: --user root
 
     steps:
-      # - run: sudo apk add bubblewrap m4 bash
-
-      # - run: sudo adduser -u 1001 1001
-      # - run: sudo addgroup 1001 sudo
-
-      # - run: su 1001
-
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          path: apple_pie
           submodules: recursive
 
-      # - run: su -
+      - run: apk add bubblewrap m4 bash
 
-      - run: sudo apk add bubblewrap m4 bash
-
-      # - run: sudo adduser -u 1001 1001
-      # - run: sudo addgroup 1001 sudo
-
-      # - run: su 1001
-
-
-      - run: echo $GITHUB_WORKSPACE
-      - run: ls $GITHUB_WORKSPACE
-      - run: echo $HOME
-      - run: ls $HOME
-      - run: pwd
-      - run: ls -lah
-      # - run: ls -lah apple_pie
-      - run: whoami
-
-      # - run: sudo mkdir apple_pie
-
-      - run: sudo opam init -y
+      - run: opam init -y
 
       - name: Create switch
-        run: sudo opam switch create . ocaml-system --deps --locked -y
-        working-directory: apple_pie
+        run: opam switch create . ocaml-system --deps --locked -y
 
       - name: Install deps
-        run: sudo opam install . -y --deps-only
-        working-directory: apple_pie
+        run: opam install . -y --deps-only
 
       - name: Build
-        run: sudo opam exec -- dune build --profile=release
-        working-directory: apple_pie
+        run: opam exec -- dune build --profile=release
 
       - name: Install
-        run: sudo opam exec -- dune install --profile=release
-        working-directory: apple_pie
-
-      - run: ls $GITHUB_WORKSPACE
-      - run: ls $GITHUB_WORKSPACE/apple_pie
-      - run: ls $GITHUB_WORKSPACE/apple_pie/_build
-      - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install
-      - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install/default
-      - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install/default/bin
+        run: opam exec -- dune install --profile=release
 
       - name: Upload the build artifact
         uses: actions/upload-artifact@v2
         with:
           name: alpine-4.12.0-static-hello
-          path: $GITHUB_WORKSPACE/apple_pie/_build/install/default/bin
-
-    # container:
-    #   image: ocaml/opam:alpine-ocaml-4.12
-    #   options: --user 1001
+          path: _build/install/default/bin/hello
 
     # steps:
     #   - name: Checkout code
     #     uses: actions/checkout@v2
     #     with:
+    #       path: apple_pie
     #       submodules: recursive
 
-    #   - run: sudo chmod u+s /usr/bin/bwrap
-    #   - run: sudo apk add linux-headers m4
-    #   - run: opam init -y
-    #   - run: opam update -y
-    #   - run: opam install . -y --deps-only
+    #   - run: sudo apk add bubblewrap m4 bash
+
+    #   - run: echo $GITHUB_WORKSPACE
+    #   - run: ls $GITHUB_WORKSPACE
+    #   - run: echo $HOME
+    #   - run: ls $HOME
+    #   - run: pwd
+    #   - run: ls -lah
+    #   # - run: ls -lah apple_pie
+    #   - run: whoami
+
+    #   # - run: sudo mkdir apple_pie
+
+    #   - run: sudo opam init -y
+
+    #   - name: Create switch
+    #     run: sudo opam switch create . ocaml-system --deps --locked -y
+    #     working-directory: apple_pie
+
+    #   - name: Install deps
+    #     run: sudo opam install . -y --deps-only
+    #     working-directory: apple_pie
 
     #   - name: Build
-    #     run: opam exec -- dune build --profile=release
-
+    #     run: sudo opam exec -- dune build --profile=release
+    #     working-directory: apple_pie
 
     #   - name: Install
-    #     run: opam exec -- dune install --profile=release
+    #     run: sudo opam exec -- dune install --profile=release
+    #     working-directory: apple_pie
+
+    #   - run: ls $GITHUB_WORKSPACE
+    #   - run: ls $GITHUB_WORKSPACE/apple_pie
+    #   - run: ls $GITHUB_WORKSPACE/apple_pie/_build
+    #   - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install
+    #   - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install/default
+    #   - run: ls -lah $GITHUB_WORKSPACE/apple_pie/_build/install/default/bin
+
+    #   - name: Upload the build artifact
+    #     uses: actions/upload-artifact@v2
+    #     with:
+    #       name: alpine-4.12.0-static-hello
+    #       path: $GITHUB_WORKSPACE/apple_pie/_build/install/default/bin
