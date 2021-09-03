@@ -22,6 +22,8 @@ jobs:
           path: apple_pie
           submodules: recursive
 
+      - run: ls ~
+      - run: pwd
       - run: ls -lah
       - run: ls -lah apple_pie
 
