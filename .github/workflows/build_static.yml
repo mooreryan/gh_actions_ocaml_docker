@@ -27,6 +27,7 @@ jobs:
       - name: Build
         run: opam exec -- dune build --profile=release
 
+
       - name: Install
         run: opam exec -- dune install --profile=release
 
