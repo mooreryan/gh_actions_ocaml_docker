@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocamlpro/ocaml:4.12-2021-08-29
-      # options: --user 1001
-      options: --user ocaml
+      options: --user 1001
+      # options: --user ocaml
 
     steps:
       # - name: Checkout code
@@ -22,6 +22,8 @@ jobs:
       #   with:
       #     path: apple_pie
       #     submodules: recursive
+
+      - run: usermod -aG sudo 1001
 
       - run: sudo apk add bubblewrap m4 bash
 
@@ -40,6 +42,10 @@ jobs:
 
       - name: Create switch
         run: sudo opam switch create . ocaml-system --deps --locked -y
+        working-directory: apple_pie
+
+      - name: Install deps
+        run: sudo opam install . -y --deps-only
         working-directory: apple_pie
 
       - name: Build
