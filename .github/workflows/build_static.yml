@@ -71,11 +71,11 @@ jobs:
         working-directory: apple_pie
 
       - name: Upload the build artifact
+        working-directory: apple_pie
         uses: actions/upload-artifact@v2
         with:
           name: alpine-4.12.0-static-hello
           path: _build/install/default/bin/hello
-          working-directory: apple_pie
 
     # container:
     #   image: ocaml/opam:alpine-ocaml-4.12
