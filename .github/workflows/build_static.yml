@@ -30,9 +30,9 @@ jobs:
           path: apple_pie
           submodules: recursive
 
-      - run: su root
+      - run: sudo su -
 
-      # - run: sudo apk add bubblewrap m4 bash
+      - run: sudo apk add bubblewrap m4 bash
 
       # - run: sudo adduser -u 1001 1001
       # - run: sudo addgroup 1001 sudo
