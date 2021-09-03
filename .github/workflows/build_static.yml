@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: alpine-4.12.0-static-hello
-          path: _build/install/default/hello
+          path: _build/install/default/bin/hello
           working-directory: apple_pie
 
     # container:

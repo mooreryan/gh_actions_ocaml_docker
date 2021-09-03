@@ -1,3 +1,4 @@
 (executable
  (name hello)
+ (public_name hello)
  (flags (-ccopt -static)))
