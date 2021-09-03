@@ -34,9 +34,11 @@ jobs:
 
       - run: sudo mkdir apple_pie
 
-      # - name: Create switch
-      #   run: sudo opam switch create . ocaml-system --deps --locked
-      #   working-directory: apple_pie
+      - run: sudo opam init
+
+      - name: Create switch
+        run: sudo opam switch create . ocaml-system --deps --locked
+        working-directory: apple_pie
 
       - name: Build
         run: sudo opam exec -- dune build --profile=release
