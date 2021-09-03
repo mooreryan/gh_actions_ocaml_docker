@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocamlpro/ocaml:4.12-2021-08-29
-      # options: --user 1001
+      options: --user 1001
       # options: --user ocaml
 
     steps:
@@ -23,7 +23,6 @@ jobs:
       - run: sudo addgroup 1001 sudo
 
       - run: su 1001
-
 
       - name: Checkout code
         uses: actions/checkout@v2
