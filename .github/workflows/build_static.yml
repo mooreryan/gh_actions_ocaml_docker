@@ -13,14 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocamlpro/ocaml:4.12-2021-08-29
-      options: --user 1001
+      # options: --user 1001
       # options: --user ocaml
 
     steps:
-
       - run: sudo apk add bubblewrap m4 bash
 
-      - run: sudo addgroup 1001 sudo
+      - run: sudo adduser 1001 sudo
 
       - run: su 1001
 
