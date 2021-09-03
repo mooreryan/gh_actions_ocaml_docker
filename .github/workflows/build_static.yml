@@ -25,10 +25,11 @@ jobs:
 
       - run: echo $GITHUB_WORKSPACE
       - run: ls $GITHUB_WORKSPACE
+      - run: echo $HOME
       - run: ls $HOME
       - run: pwd
       - run: ls -lah
-      - run: ls -lah apple_pie
+      # - run: ls -lah apple_pie
       - run: whoami
 
       - name: Create switch
