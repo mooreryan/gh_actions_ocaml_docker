@@ -70,6 +70,13 @@ jobs:
         run: sudo opam exec -- dune install --profile=release
         working-directory: apple_pie
 
+      - run: ls $GITHUB_WORKSPACE
+      - run: ls $GITHUB_WORKSPACE/apple_pie
+      - run: ls $GITHUB_WORKSPACE/apple_pie/_build
+      - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install
+      - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install/default
+      - run: ls $GITHUB_WORKSPACE/apple_pie/_build/install/default/bin
+
       - name: Upload the build artifact
         uses: actions/upload-artifact@v2
         with:
