@@ -32,6 +32,8 @@ jobs:
       # - run: ls -lah apple_pie
       - run: whoami
 
+      - run: mkdir apple_pie
+
       - name: Create switch
         run: opam switch create . ocaml-system --deps --locked
         working-directory: apple_pie
