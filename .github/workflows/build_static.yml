@@ -13,8 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ocamlpro/ocaml:4.12-2021-08-29
-      options: --user 1001
+      # options: --user 1001
       # options: --user ocaml
+      options: --user root
 
     steps:
       # - run: sudo apk add bubblewrap m4 bash
@@ -30,7 +31,7 @@ jobs:
           path: apple_pie
           submodules: recursive
 
-      - run: su -
+      # - run: su -
 
       - run: sudo apk add bubblewrap m4 bash
 
