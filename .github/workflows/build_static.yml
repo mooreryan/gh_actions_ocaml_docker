@@ -23,7 +23,7 @@ jobs:
       #     path: apple_pie
       #     submodules: recursive
 
-      - run: sudo apk add bubblewrap m4
+      - run: sudo apk add bubblewrap m4 bash
 
       - run: echo $GITHUB_WORKSPACE
       - run: ls $GITHUB_WORKSPACE
@@ -36,10 +36,10 @@ jobs:
 
       - run: sudo mkdir apple_pie
 
-      - run: sudo opam init
+      - run: sudo opam init -y
 
       - name: Create switch
-        run: sudo opam switch create . ocaml-system --deps --locked
+        run: sudo opam switch create . ocaml-system --deps --locked -y
         working-directory: apple_pie
 
       - name: Build
