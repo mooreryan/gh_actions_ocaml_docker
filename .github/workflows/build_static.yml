@@ -22,7 +22,9 @@ jobs:
           path: apple_pie
           submodules: recursive
 
-      - run: ls ~
+      - run: echo $GITHUB_WORKSPACE
+      - run: ls $GITHUB_WORKSPACE
+      - run: ls $HOME
       - run: pwd
       - run: ls -lah
       - run: ls -lah apple_pie
