@@ -23,6 +23,8 @@ jobs:
       #     path: apple_pie
       #     submodules: recursive
 
+      - run: sudo apk add bubblewrap m4
+
       - run: echo $GITHUB_WORKSPACE
       - run: ls $GITHUB_WORKSPACE
       - run: echo $HOME
