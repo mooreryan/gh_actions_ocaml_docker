@@ -46,7 +46,7 @@ jobs:
   silly_job:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mooreryan/lala_test_image@sha256:9809ec2536da1bd6fca3a22e9db1ca8b19fb3cad9e17e9fa1d4fda673ab8da60
+      image: ghcr.io/mooreryan/lala_test_image:2
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -60,15 +60,15 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Use OCaml 4.12.0
-        uses: ocaml/setup-ocaml@v2
-        with:
-          ocaml-compiler: 4.12.0
-          dune-cache: true
-          cache-prefix: v1-4.12.0
+      # - name: Use OCaml 4.12.0
+      #   uses: ocaml/setup-ocaml@v2
+      #   with:
+      #     ocaml-compiler: 4.12.0
+      #     dune-cache: true
+      #     cache-prefix: v1-4.12.0
 
       - name: Install deps
-        run: opam install . --deps-only --with-doc --with-test
+        run: opam install . --deps-only # --with-doc --with-test
 
       - name: Build
         run: opam exec -- dune build --profile=release
@@ -82,44 +82,83 @@ jobs:
           name: alpine-4.12.0-static-hello-2
           path: _build/install/default/bin/hello
 
-  silly_job_2:
-    runs-on: ubuntu-latest
-    container:
-      image: ocamlpro/ocaml:4.12-2021-08-29
-      # credentials:
-      #   username: ${{ github.actor }}
-      #   password: ${{ secrets.GITHUB_TOKEN }}
-      # options: --user runner
+  # silly_job:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: ghcr.io/mooreryan/lala_test_image@sha256:9809ec2536da1bd6fca3a22e9db1ca8b19fb3cad9e17e9fa1d4fda673ab8da60
+  #     credentials:
+  #       username: ${{ github.actor }}
+  #       password: ${{ secrets.GITHUB_TOKEN }}
+  #     # options: --user runner
 
-    steps:
-      - run: sudo apk add bubblewrap bash
+  #   steps:
+  #     - run: sudo apk add bubblewrap bash
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: recursive
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #       with:
+  #         submodules: recursive
 
-      - name: Use OCaml 4.12.0
-        uses: ocaml/setup-ocaml@v2
-        with:
-          ocaml-compiler: 4.12.0
-          dune-cache: true
-          cache-prefix: v1-4.12.0
+  #     - name: Use OCaml 4.12.0
+  #       uses: ocaml/setup-ocaml@v2
+  #       with:
+  #         ocaml-compiler: 4.12.0
+  #         dune-cache: true
+  #         cache-prefix: v1-4.12.0
 
-      - name: Install deps
-        run: opam install . --deps-only --with-doc --with-test
+  #     - name: Install deps
+  #       run: opam install . --deps-only --with-doc --with-test
 
-      - name: Build
-        run: opam exec -- dune build --profile=release
+  #     - name: Build
+  #       run: opam exec -- dune build --profile=release
 
-      - name: Install
-        run: opam exec -- dune install --profile=release
+  #     - name: Install
+  #       run: opam exec -- dune install --profile=release
 
-      - name: Upload the build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: alpine-4.12.0-static-hello-2
-          path: _build/install/default/bin/hello
+  #     - name: Upload the build artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: alpine-4.12.0-static-hello-2
+  #         path: _build/install/default/bin/hello
+
+  # silly_job_2:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: ocamlpro/ocaml:4.12-2021-08-29
+  #     # credentials:
+  #     #   username: ${{ github.actor }}
+  #     #   password: ${{ secrets.GITHUB_TOKEN }}
+  #     # options: --user runner
+
+  #   steps:
+  #     - run: sudo apk add bubblewrap bash
+
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #       with:
+  #         submodules: recursive
+
+  #     - name: Use OCaml 4.12.0
+  #       uses: ocaml/setup-ocaml@v2
+  #       with:
+  #         ocaml-compiler: 4.12.0
+  #         dune-cache: true
+  #         cache-prefix: v1-4.12.0
+
+  #     - name: Install deps
+  #       run: opam install . --deps-only --with-doc --with-test
+
+  #     - name: Build
+  #       run: opam exec -- dune build --profile=release
+
+  #     - name: Install
+  #       run: opam exec -- dune install --profile=release
+
+  #     - name: Upload the build artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: alpine-4.12.0-static-hello-2
+  #         path: _build/install/default/bin/hello
 
     # steps:
     #   - name: Checkout code
