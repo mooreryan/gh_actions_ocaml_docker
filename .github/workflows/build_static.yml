@@ -46,8 +46,11 @@ jobs:
   silly_job:
     runs-on: ubuntu-latest
     container:
-      image: ocamlpro/ocaml:4.12-2021-08-29
-      options: --user runner
+      image: ghcr.io/mooreryan/lala_test_image@sha256:9809ec2536da1bd6fca3a22e9db1ca8b19fb3cad9e17e9fa1d4fda673ab8da60
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      # options: --user runner
 
     steps:
       - name: Checkout code
