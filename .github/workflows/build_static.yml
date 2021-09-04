@@ -46,26 +46,19 @@ jobs:
   silly_job:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mooreryan/lala_test_image:2
+      image: ghcr.io/mooreryan/ocaml_alpine:4.12-2021-08-29
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
       # options: --user runner
 
     steps:
-      - run: sudo apk add bubblewrap bash
-
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      # - name: Use OCaml 4.12.0
-      #   uses: ocaml/setup-ocaml@v2
-      #   with:
-      #     ocaml-compiler: 4.12.0
-      #     dune-cache: true
-      #     cache-prefix: v1-4.12.0
+      - run: opam switch
 
       - name: Install deps
         run: opam install . --deps-only # --with-doc --with-test
