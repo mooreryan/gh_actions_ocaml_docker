@@ -53,7 +53,7 @@ jobs:
       # options: --user runner
 
     steps:
-      - run: apk add bubblewrap
+      - run: sudo apk add bubblewrap
 
       - name: Checkout code
         uses: actions/checkout@v2
