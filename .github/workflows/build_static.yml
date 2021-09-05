@@ -46,7 +46,7 @@ jobs:
   silly_job:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mooreryan/ocaml_alpine:4.12-2021-08-29
+      image: ghcr.io/mooreryan/ocaml_alpine:4.12-2021-08-29-be9bf59
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
